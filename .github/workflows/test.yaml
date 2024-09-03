@@ -14,12 +14,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # - name: Generate Image Tag
-      #   id: image-tag
-      #   run: |
-      #     image_tag="$IMAGE_REPOSITORY/$SERVICE:${GITHUB_SHA::8}"
-      #     echo "tag=$image_tag" >> $GITHUB_OUTPUT
+      - name: Generate Image Tag
+        id: image-tag
+        run: |
+          image_tag="my/repo/image:${GITHUB_SHA::8}"
+          echo "tag=$image_tag" >> $GITHUB_OUTPUT
 
       - name: Generate Image Tag
         run: |
-          echo "${{env.GITHUB_SHA}}"
+          echo "${{ steps.image-tag.outputs.tag }}"
