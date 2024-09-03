@@ -20,9 +20,9 @@ jobs:
           tag="my/repo/image:${GITHUB_SHA::8}"
           echo "image_tag=$tag" >> $GITHUB_OUTPUT
 
-      # - name: echo
-      #   run: |-
-      #     export image_tag="${{ image_tag }}"       
+      - name: echo
+        run: |-
+          export image_tag="${{ steps.image-tag.outputs.image_tag }}"       
 
   deploy:
     needs: build
