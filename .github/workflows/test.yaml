@@ -21,7 +21,10 @@ jobs:
 
       - name: echo
         run: |-
-          export image_tag="${{ steps.image-tag.outputs.image_tag }}"       
+          export image_tag="${{ steps.image-tag.outputs.image_tag }}"
+
+    outputs:
+          image_tag: ${{ steps.image-tag.outputs.image_tag }}
 
   deploy:
     needs: build
