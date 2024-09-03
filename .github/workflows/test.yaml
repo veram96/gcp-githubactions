@@ -32,8 +32,9 @@ jobs:
 
       - name: Render cloud run manifest
         run: |-
-          export image_tag="${{ needs.build.outputs.image_tag }}"
           envsubst < cicd/environments/dev/cloudrun.yaml
+        env:
+          image_tag: ${{ needs.build.outputs.image_tag }}
 
       - name: cat
         run: cat cicd/environments/dev/cloudrun.yaml
