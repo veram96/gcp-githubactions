@@ -1,0 +1,25 @@
+name: DEV Deployment Workflow
+
+on:
+  push:
+
+jobs:
+  build:
+    name: Docker build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Generate Image Tag
+        id: image-tag
+        run: |
+          image_tag="$IMAGE_REPOSITORY/$SERVICE:${GITHUB_SHA::8}"
+          echo "tag=$image_tag" >> $GITHUB_OUTPUT
+
+      - name: Generate Image Tag
+        run: |
+          echo "${{ steps.image-tag.outputs.tag }}"
