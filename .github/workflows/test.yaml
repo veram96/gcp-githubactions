@@ -29,7 +29,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Render cloud run manifest
-        run: envsubst < cicd/environments/dev/cloudrun.yaml
+        run: |-
+          export image_tag="${{ needs.build.outputs.image_tag }}"
+          envsubst < cicd/environments/dev/cloudrun.yaml
 
       - name: cat
         run: cat cicd/environments/dev/cloudrun.yaml
